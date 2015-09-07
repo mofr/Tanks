@@ -1,0 +1,143 @@
+fileFormatVersion: 2
+guid: ef35047e503f8a547bedf225bc422c4d
+timeCreated: 1441620638
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: tanks_4
+    21300002: tanks_5
+    21300004: PanzerIVTower
+    21300006: tanks_7
+    21300008: tanks_8
+    21300010: tanks_9
+    21300012: PanzerIV
+    21300014: tanks_11
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: tanks_4
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 170
+        width: 21
+        height: 38
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: tanks_5
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 166
+        width: 23
+        height: 58
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PanzerIVTower
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 160
+        width: 24
+        height: 61
+      alignment: 9
+      pivot: {x: .479488373, y: .306318939}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: tanks_7
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 160
+        width: 25
+        height: 69
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: tanks_8
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 87
+        width: 33
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: tanks_9
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 81
+        width: 34
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PanzerIV
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 85
+        width: 34
+        height: 59
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: tanks_11
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 82
+        width: 36
+        height: 61
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
