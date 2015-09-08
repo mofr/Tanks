@@ -126,14 +126,6 @@ public class Tank : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerEnter2D(Collider2D collider) {
-		Projectile projectile = collider.GetComponent<Projectile>();
-		if(projectile) {
-			TakeDamage (30);
-			ProjectilePool.instance.Pool(projectile);
-		}
-	}
-
 	void CreateLaser (Vector3 startPoint, Vector3 endPoint)
 	{
 		GameObject laser = new GameObject ("Laser");
