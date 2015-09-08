@@ -91,7 +91,7 @@ public class Detonator : MonoBehaviour {
 	
 	void Awake() 
 	{
-		FillDefaultMaterials();
+		//FillDefaultMaterials();
 		
         components = this.GetComponents(typeof(DetonatorComponent));
 		foreach (DetonatorComponent dc in components)
@@ -315,6 +315,7 @@ public class Detonator : MonoBehaviour {
 	
 	public static Material DefaultSmokeAMaterial()
 	{
+		Debug.Log (defaultSmokeAMaterial);
 		if (defaultSmokeAMaterial != null) return defaultSmokeAMaterial;
         defaultSmokeAMaterial = new Material(Shader.Find("Particles/Alpha Blended"));
 		defaultSmokeAMaterial.name = "SmokeA-Default";

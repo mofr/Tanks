@@ -9,6 +9,7 @@ public class Tank : MonoBehaviour {
 
 	public GameObject hitEffectPrefab;
 	public GameObject deathEffectPrefab;
+	public Material laserMaterial;
 
 	[Header("Battle")]
 	public float maxHealth = 100;
@@ -42,8 +43,6 @@ public class Tank : MonoBehaviour {
 
 	float speed = 0f;
 	float attackCooldownRemains = 0f;
-
-	static Material laserMaterial = new Material(Shader.Find("Particles/Additive"));
 
 	void Awake() {
 		transform = GetComponent<Transform>();
