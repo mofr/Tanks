@@ -3,6 +3,8 @@ using System.Collections;
 
 public class TankAI : MonoBehaviour {
 
+	static LayerMask seenLayers = 1 << LayerMask.NameToLayer ("Default");
+
 	Tank tank;
 
 	Collider2D[] closeColliders = new Collider2D[30];
@@ -28,10 +30,10 @@ public class TankAI : MonoBehaviour {
 	IEnumerator SeekTanks() {
 		while (!tank.dead) {
 			bool currentTargetVisible = false;
-			int count = Physics2D.OverlapCircleNonAlloc(transform.position, tank.fovDistance, closeColliders);
+			int count = Physics2D.OverlapCircleNonAlloc(transform.position, tank.fovDistance, closeColliders, seenLayers);
 			for(int i = 0; i < count; ++i) {
 				Collider2D collider = closeColliders[i];
-				Tank otherTank = collider.GetComponent<Tank>();
+				Tank otherTank = collider.attachedRigidbody.GetComponent<Tank>();
 				if(!otherTank) continue;
 				
 				//todo check tank visibility

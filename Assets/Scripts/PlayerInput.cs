@@ -15,9 +15,14 @@ public class PlayerInput : MonoBehaviour {
 		tank.LookAt (pos);
 
 		tank.Move(Input.GetAxisRaw ("Vertical"));
+		tank.Rotate(Input.GetAxisRaw ("Horizontal"));
 
-		if (Input.GetButtonDown ("Fire1")) {
+		if (Input.GetButton ("Fire1")) {
 			tank.Fire();
+		}
+
+		if (Input.GetButtonDown ("Immortal")) {
+			tank.immortal = !tank.immortal;
 		}
 	}
 }
