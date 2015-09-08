@@ -22,7 +22,9 @@ public class TankAI : MonoBehaviour {
 		if (currentTarget) {
 			tank.LookAt (currentTarget.transform.position);
 			tank.Fire ();
+			tank.Move(0);
 		} else {
+			tank.RotateTowards(new Vector3(0,0,0));
 			tank.Move(1);
 		}
 	}

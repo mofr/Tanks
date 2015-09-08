@@ -36,7 +36,6 @@ public class Tank : MonoBehaviour {
 
 	Renderer bodyRenderer;
 	Rigidbody2D rigidBody;
-	Collider2D bodyCollider;
 	Transform ui;
 	Image healthBar;
 	Image attackRecoveryBar;
@@ -51,7 +50,6 @@ public class Tank : MonoBehaviour {
 		rigidBody = GetComponentInChildren<Rigidbody2D>();
 		tower = transform.Find ("Tower");
 		body = transform.Find ("Body");
-		bodyCollider = body.GetComponent<Collider2D> ();
 		ui = transform.Find ("UI");
 		healthBar = transform.Find ("UI/HealthBar").GetComponent<Image>();
 		attackRecoveryBar = transform.Find ("UI/AttackRecoveryBar").GetComponent<Image>();
@@ -88,6 +86,11 @@ public class Tank : MonoBehaviour {
 	public void LookAt(Vector3 position) {
 		Quaternion targetRotation = Quaternion.FromToRotation (Vector3.up, position-transform.position);
 		tower.rotation = Quaternion.RotateTowards (tower.rotation, targetRotation, towerTurnRate * Time.deltaTime);
+	}
+
+	public void RotateTowards(Vector3 position) {
+		Quaternion targetRotation = Quaternion.FromToRotation (Vector3.up, position-transform.position);
+		body.rotation = Quaternion.RotateTowards (body.rotation, targetRotation, turnRate * Time.deltaTime);
 	}
 
 	public void Rotate(float direction) {
@@ -154,9 +157,5 @@ public class Tank : MonoBehaviour {
 			gameObject.SetActive (false);
 			ui.gameObject.SetActive(false);
 		}
-	}
-
-	void OnDrawGizmosSelected() {
-		Gizmos.DrawWireSphere (GetComponent<Transform>().position, fovDistance);
 	}
 }

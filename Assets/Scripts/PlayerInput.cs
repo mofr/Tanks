@@ -5,8 +5,8 @@ public class PlayerInput : MonoBehaviour {
 
 	Tank tank;
 
-	void Start () {
-		tank = GameObject.FindWithTag ("Player").GetComponent<Tank>();
+	void Awake () {
+		tank = GetComponent<Tank>();
 	}
 
 	void Update () {
