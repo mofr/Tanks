@@ -35,6 +35,9 @@ public class Tank : MonoBehaviour {
 	[HideInInspector]
 	public Transform body;
 
+	public delegate void DeathAction(Tank tank);
+	public static event DeathAction OnDeath;
+
 	Renderer bodyRenderer;
 	Rigidbody2D rigidBody;
 	Transform ui;
@@ -155,6 +158,7 @@ public class Tank : MonoBehaviour {
 			dead = true;
 			gameObject.SetActive (false);
 			ui.gameObject.SetActive(false);
+			OnDeath(this);
 		}
 	}
 }
