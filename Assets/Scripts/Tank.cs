@@ -10,7 +10,7 @@ public class Tank : MonoBehaviour {
 	public GameObject uiPrefab;
 	public GameObject hitEffectPrefab;
 	public GameObject deathEffectPrefab;
-	public Material laserMaterial;
+	public LineRenderer laserPrefab;
 
 	[Header("Battle")]
 	public float maxHealth = 100;
@@ -111,20 +111,15 @@ public class Tank : MonoBehaviour {
 		}
 
 		if (laserVisible) {
-			CreateLaser (tower.position, endPoint);
+			CreateLaser (transform.position, endPoint);
 		}
 	}
 
 	void CreateLaser (Vector3 startPoint, Vector3 endPoint)
 	{
-		GameObject laser = new GameObject ("Laser");
-		LineRenderer lineRenderer = laser.AddComponent<LineRenderer>();
-		lineRenderer.SetVertexCount (2);
-		lineRenderer.SetColors (Color.grey, Color.red);
-		lineRenderer.SetWidth (0.02f, 0.025f);
-		lineRenderer.SetPosition (0, startPoint);
-		lineRenderer.SetPosition (1, endPoint);
-		lineRenderer.material = laserMaterial;
+		LineRenderer laser = Instantiate (laserPrefab, startPoint, Quaternion.identity) as LineRenderer;
+		laser.SetPosition (0, startPoint);
+		laser.SetPosition (1, endPoint);
 		Destroy (laser, 0.1f);
 	}
 

@@ -104,7 +104,7 @@ MonoBehaviour:
   uiPrefab: {fileID: 199504, guid: 96ef579e23b6ede44b38e6e4f9c0be80, type: 2}
   hitEffectPrefab: {fileID: 139578, guid: 6ce89c0c8b21377438f18f3faa73e978, type: 2}
   deathEffectPrefab: {fileID: 141802, guid: 35866a6bf33755e4d87d84271363aba5, type: 2}
-  laserMaterial: {fileID: 2100000, guid: 67f31ff91a9d6194b9c44e240df17e7a, type: 2}
+  laserPrefab: {fileID: 12042756, guid: c135802d19056294b87cc786f6803bac, type: 2}
   maxHealth: 100
   health: 100
   dead: 0
@@ -198,6 +198,11 @@ Prefab:
       propertyPath: attackCooldown
       value: .5
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: laserPrefab
+      value: 
+      objectReference: {fileID: 12042756, guid: c135802d19056294b87cc786f6803bac,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 163794}

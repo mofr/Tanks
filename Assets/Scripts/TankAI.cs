@@ -29,7 +29,7 @@ public class TankAI : MonoBehaviour {
 	
 	IEnumerator SeekTarget () {
 		while (!tank.dead) {
-			yield return new WaitForSeconds (Random.Range (0.3f, 0.5f));
+			yield return new WaitForSeconds (Random.Range (0.15f, 0.3f));
 
 			bool currentTargetVisible = false;
 			int count = Physics2D.OverlapCircleNonAlloc (transform.position, tank.fovDistance, closeColliders, visibleLayers);
