@@ -12,11 +12,23 @@ public class UI : MonoBehaviour {
 	public Text team1CountText;
 	public Text team2CountText;
 
+	public GameObject mapPanel;
+
+	public Text fpsText;
+
 	int team1Count = 0;
 	int team2Count = 0;
 
+	float deltaTime = 0;
+
 	void Awake() {
 		Tank.OnDeath += OnTankDeath;
+	}
+
+	void Update () {
+		deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
+		float fps = 1.0f / deltaTime;
+		fpsText.text = ((int)fps).ToString() + " fps";
 	}
 	
 	public void OnPlay() {
@@ -30,10 +42,11 @@ public class UI : MonoBehaviour {
 			return;
 		}
 
-		LevelGenerator.instance.Generate (tankCount, worldSize);
+		Level.instance.Generate (tankCount, worldSize);
 
 		generatePanel.SetActive(false);
 		scorePanel.SetActive (true);
+		mapPanel.SetActive (true);
 
 		team1Count = tankCount / 2 + 1; // + 1 player tank
 		team2Count = tankCount - tankCount / 2;

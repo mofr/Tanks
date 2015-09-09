@@ -110,7 +110,7 @@ MonoBehaviour:
   dead: 0
   immortal: 0
   damage: 30
-  attackCooldown: 1
+  attackCooldown: .5
   fovDistance: 6
   fovAngle: 120
   maxSpeed: 2
@@ -193,6 +193,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: maxSpeed
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attackCooldown
+      value: .5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

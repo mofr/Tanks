@@ -1,29 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LevelGenerator : MonoBehaviour
-{
-	
+public class Level : MonoBehaviour {
+
+	public static Level instance;
 	public Tank tankPrefab1;
 	public Tank tankPrefab2;
 	public Material terrainMaterial;
-	public static LevelGenerator instance;
-	static float pixelsPerUnit = 100;
+	public float pixelsPerUnit = 100;
 
-	void Awake ()
-	{
+	[HideInInspector]
+	public float worldSize;
+
+	void Awake () {
 		instance = this;
 	}
 
-	public void Generate (int tankCount, int worldSize)
-	{
+	public void Generate (int tankCount, int worldSize) {
+		this.worldSize = worldSize;
+
 		GenerateTerrain (worldSize);
 		GeneratePlayerTank ();
 		GenerateTanks (tankCount, worldSize);
 	}
 
-	void GenerateTerrain (int worldSize)
-	{
+	void GenerateTerrain (int worldSize) {
 		GameObject terrain = new GameObject ("Terrain");
 		terrain.transform.position = new Vector3 (0, 0, 1);
 		MeshRenderer meshRenderer = terrain.AddComponent<MeshRenderer> ();
@@ -47,8 +48,7 @@ public class LevelGenerator : MonoBehaviour
 		meshFilter.mesh = mesh;
 	}
 
-	void GenerateTanks (int tankCount, int worldSize)
-	{
+	void GenerateTanks (int tankCount, int worldSize) {
 		float between = Mathf.Min(worldSize / 10, 10);
 		for (int i = 0; i < tankCount; ++i) {
 			int team = i % 2;
@@ -57,7 +57,7 @@ public class LevelGenerator : MonoBehaviour
 			if(team == 0) {
 				rotation = Quaternion.Euler(0, 0, 0);
 				position = new Vector2 (Random.Range (-worldSize, worldSize)/2,
-				                        Random.Range (-worldSize, between)/2);
+				                        Random.Range (-worldSize, -between)/2);
 			} else {
 				rotation = Quaternion.Euler(0, 0, 180);
 				position = new Vector2 (Random.Range (-worldSize, worldSize)/2,
@@ -71,8 +71,7 @@ public class LevelGenerator : MonoBehaviour
 		}
 	}
 
-	void GeneratePlayerTank ()
-	{
+	void GeneratePlayerTank () {
 		Tank playerTank = Instantiate (tankPrefab1, new Vector3 (0, 0), Quaternion.identity) as Tank;
 		playerTank.gameObject.AddComponent<PlayerInput> ();
 		playerTank.name = "Player Tank";
