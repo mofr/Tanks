@@ -7,6 +7,7 @@ public class Tank : MonoBehaviour {
 
 	public int team = 0;
 
+	public GameObject uiPrefab;
 	public GameObject hitEffectPrefab;
 	public GameObject deathEffectPrefab;
 	public Material laserMaterial;
@@ -33,31 +34,20 @@ public class Tank : MonoBehaviour {
 	public Transform tower;
 
 	[HideInInspector]
-	public Transform body;
+	public float attackCooldownRemains = 0f;
 
 	public delegate void DeathAction(Tank tank);
 	public static event DeathAction OnDeath;
 
-	Renderer bodyRenderer;
-	Rigidbody2D rigidBody;
-	Transform ui;
-	Image healthBar;
-	Image attackRecoveryBar;
-
-	float speed = 0f;
-	float attackCooldownRemains = 0f;
+	new Renderer renderer;
+	new Rigidbody2D rigidbody;
+	GameObject ui;
 
 	void Awake() {
 		transform = GetComponent<Transform>();
-		rigidBody = GetComponentInChildren<Rigidbody2D>();
+		rigidbody = GetComponent<Rigidbody2D>();
+		renderer = GetComponent<Renderer>();
 		tower = transform.Find ("Tower");
-		body = transform.Find ("Body");
-		ui = transform.Find ("UI");
-		healthBar = transform.Find ("UI/HealthBar").GetComponent<Image>();
-		attackRecoveryBar = transform.Find ("UI/AttackRecoveryBar").GetComponent<Image>();
-
-		bodyRenderer = body.GetComponent<Renderer>();
-		ui.SetParent (transform.parent);
 	}
 
 	void Update () {
@@ -66,41 +56,35 @@ public class Tank : MonoBehaviour {
 		}
 	}
 
-	void LateUpdate() {
-		ui.gameObject.SetActive (bodyRenderer.isVisible);
+	void OnBecameVisible () {
+		ui = Instantiate (uiPrefab, transform.position, Quaternion.identity) as GameObject;
+		ui.transform.SetParent (transform);
+	}
 
-		if (ui.gameObject.activeInHierarchy) {
-			ui.position = transform.position;
-
-			healthBar.color = team == 0 ? Color.green : Color.red;
-			healthBar.transform.localScale = new Vector3 (Mathf.Clamp01 (health / maxHealth), 1);
-
-			attackRecoveryBar.transform.localScale = new Vector3 (Mathf.Clamp01 (attackCooldownRemains / attackCooldown), 1);
+	void OnBecameInvisible () {
+		if (ui) {
+			Destroy (ui);
 		}
 	}
 
-	void FixedUpdate() {
-		if (speed != 0) {
-			rigidBody.MovePosition (transform.position + body.up * speed * Time.deltaTime);
-		}
-	}
-
-	public void LookAt(Vector3 position) {
+	public void LookAt (Vector3 position) {
 		Quaternion targetRotation = Quaternion.FromToRotation (Vector3.up, position-transform.position);
 		tower.rotation = Quaternion.RotateTowards (tower.rotation, targetRotation, towerTurnRate * Time.deltaTime);
 	}
 
-	public void RotateTowards(Vector3 position) {
+	public void RotateTowards (Vector3 position) {
 		Quaternion targetRotation = Quaternion.FromToRotation (Vector3.up, position-transform.position);
-		body.rotation = Quaternion.RotateTowards (body.rotation, targetRotation, turnRate * Time.deltaTime);
+		transform.rotation = Quaternion.RotateTowards (transform.rotation, targetRotation, turnRate * Time.deltaTime);
 	}
 
-	public void Rotate(float direction) {
-		body.Rotate (0, 0, -direction * turnRate * Time.deltaTime);
+	public void Rotate (float direction) {
+		transform.Rotate (0, 0, -direction * turnRate * Time.deltaTime);
 	}
 
 	public void Move (float move) {
-		speed = move * maxSpeed;
+		if (move != 0) {
+			rigidbody.MovePosition (transform.position + transform.up * move * maxSpeed * Time.deltaTime);
+		}
 	}
 
 	public void Fire () {
@@ -112,13 +96,13 @@ public class Tank : MonoBehaviour {
 		Vector3 endPoint = tower.position + tower.up * fovDistance;
 		RaycastHit2D hit = Physics2D.Linecast (tower.position, endPoint);
 
-		bool laserVisible = bodyRenderer.isVisible;
+		bool laserVisible = renderer.isVisible;
 
 		if(hit) {
 			endPoint = hit.point;
 			Tank tank = hit.rigidbody.GetComponent<Tank>();
 			if(tank) {
-				if(tank.bodyRenderer.isVisible) {
+				if(tank.renderer.isVisible) {
 					laserVisible = true;
 					Instantiate (hitEffectPrefab, (Vector3)hit.point + new Vector3(0,0,-1), Quaternion.identity);
 				}
@@ -151,14 +135,27 @@ public class Tank : MonoBehaviour {
 
 		health -= damage;
 		if (health <= 0) {
-			if(bodyRenderer.isVisible) {
+			if(renderer.isVisible) {
 				Instantiate (deathEffectPrefab, transform.position + new Vector3(0,0,-1), Quaternion.identity);
 			}
 
-			dead = true;
-			gameObject.SetActive (false);
-			ui.gameObject.SetActive(false);
 			OnDeath(this);
+
+			dead = true;
+			if(ui) {
+				Destroy (ui.gameObject);
+			}
+			Destroy (gameObject);
 		}
+	}
+
+	void OnDrawGizmosSelected () {
+		if (!tower) {
+			return;
+		}
+
+		Gizmos.DrawLine (tower.position, tower.position + tower.up * fovDistance);
+		Gizmos.DrawLine (tower.position, tower.position + Quaternion.Euler (0, 0, fovAngle / 2) * tower.up * fovDistance);
+		Gizmos.DrawLine (tower.position, tower.position + Quaternion.Euler (0, 0, -fovAngle / 2) * tower.up * fovDistance);
 	}
 }

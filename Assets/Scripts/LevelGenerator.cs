@@ -4,10 +4,11 @@ using System.Collections;
 public class LevelGenerator : MonoBehaviour
 {
 	
-	public Tank tankPrefab;
+	public Tank tankPrefab1;
+	public Tank tankPrefab2;
 	public Material terrainMaterial;
 	public static LevelGenerator instance;
-	static int pixelsPerUnit = 100;
+	static float pixelsPerUnit = 100;
 
 	void Awake ()
 	{
@@ -48,19 +49,31 @@ public class LevelGenerator : MonoBehaviour
 
 	void GenerateTanks (int tankCount, int worldSize)
 	{
+		float between = Mathf.Min(worldSize / 10, 10);
 		for (int i = 0; i < tankCount; ++i) {
-			Vector2 position = new Vector2 (Random.Range (-worldSize, worldSize)/2,
-			                                Random.Range (-worldSize, worldSize)/2);
-			Tank tank = Instantiate (tankPrefab, position, Quaternion.identity) as Tank;
+			int team = i % 2;
+			Quaternion rotation;
+			Vector2 position;
+			if(team == 0) {
+				rotation = Quaternion.Euler(0, 0, 0);
+				position = new Vector2 (Random.Range (-worldSize, worldSize)/2,
+				                        Random.Range (-worldSize, between)/2);
+			} else {
+				rotation = Quaternion.Euler(0, 0, 180);
+				position = new Vector2 (Random.Range (-worldSize, worldSize)/2,
+				                        Random.Range (between, worldSize)/2);
+			}
+			Tank prefab = team == 0 ? tankPrefab1 : tankPrefab2;
+			Tank tank = Instantiate (prefab, position, rotation) as Tank;
 			tank.name = "Tank #" + i;
 			tank.gameObject.AddComponent<TankAI> ();
-			tank.team = i % 2;
+			tank.team = team;
 		}
 	}
 
 	void GeneratePlayerTank ()
 	{
-		Tank playerTank = Instantiate (tankPrefab, new Vector3 (0, 0), Quaternion.identity) as Tank;
+		Tank playerTank = Instantiate (tankPrefab1, new Vector3 (0, 0), Quaternion.identity) as Tank;
 		playerTank.gameObject.AddComponent<PlayerInput> ();
 		playerTank.name = "Player Tank";
 		playerTank.tag = "Player";

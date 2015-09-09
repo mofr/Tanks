@@ -1,16 +1,16 @@
 fileFormatVersion: 2
 guid: ef35047e503f8a547bedf225bc422c4d
-timeCreated: 1441620638
+timeCreated: 1441780641
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: tanks_4
-    21300002: tanks_5
+    21300002: T34Tower
     21300004: PanzerIVTower
     21300006: tanks_7
     21300008: tanks_8
-    21300010: tanks_9
-    21300012: PanzerIV
+    21300010: T34Body
+    21300012: PanzerIVBody
     21300014: tanks_11
   serializedVersion: 2
   mipmaps:
@@ -67,15 +67,15 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: tanks_5
+    - name: T34Tower
       rect:
         serializedVersion: 2
         x: 159
         y: 166
         width: 23
         height: 58
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .500000656, y: .227733478}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: PanzerIVTower
       rect:
@@ -107,7 +107,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: tanks_9
+    - name: T34Body
       rect:
         serializedVersion: 2
         x: 154
@@ -117,7 +117,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: PanzerIV
+    - name: PanzerIVBody
       rect:
         serializedVersion: 2
         x: 249
