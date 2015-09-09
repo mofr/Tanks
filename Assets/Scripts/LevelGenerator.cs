@@ -18,8 +18,8 @@ public class LevelGenerator : MonoBehaviour
 	public void Generate (int tankCount, int worldSize)
 	{
 		GenerateTerrain (worldSize);
-		GenerateTanks (tankCount, worldSize);
 		GeneratePlayerTank ();
+		GenerateTanks (tankCount, worldSize);
 	}
 
 	void GenerateTerrain (int worldSize)
@@ -78,6 +78,7 @@ public class LevelGenerator : MonoBehaviour
 		playerTank.name = "Player Tank";
 		playerTank.tag = "Player";
 		playerTank.immortal = true;
+		playerTank.maxSpeed *= 2;
 		Camera.main.GetComponent<CameraController> ().target = playerTank.transform;
 	}
 }

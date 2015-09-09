@@ -35,7 +35,7 @@ public class TankAI : MonoBehaviour {
 			int count = Physics2D.OverlapCircleNonAlloc (transform.position, tank.fovDistance, closeColliders, visibleLayers);
 			for (int i = 0; i < count; ++i) {
 				Collider2D collider = closeColliders [i];
-				Tank otherTank = collider.attachedRigidbody.GetComponent<Tank> ();
+				Tank otherTank = collider.GetComponent<Tank> ();
 				if (!otherTank) {
 					continue;
 				}
@@ -44,9 +44,9 @@ public class TankAI : MonoBehaviour {
 					continue;
 				}
 
-				//check fov visibility
-				float toTank = Quaternion.FromToRotation (tank.tower.up, otherTank.transform.position - tank.transform.position).eulerAngles.z;
-				if (Mathf.Abs (toTank) > tank.fovAngle / 2) {
+				//check angular visibility
+				float angleToTarget = Vector3.Angle(tank.tower.up, otherTank.transform.position - tank.transform.position);
+				if (Mathf.Abs (angleToTarget) > tank.fovAngle / 2) {
 					continue;
 				}
 				
@@ -59,6 +59,7 @@ public class TankAI : MonoBehaviour {
 					currentTargetVisible = true;
 				}
 			}
+
 			if (!currentTargetVisible) {
 				target = null;
 			}
