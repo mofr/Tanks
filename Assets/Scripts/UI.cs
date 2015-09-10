@@ -37,6 +37,14 @@ public class UI : MonoBehaviour {
                 Application.LoadLevel(Application.loadedLevel);
             }
         }
+
+        if (Input.GetButtonDown ("SpeedUp")) {
+            Time.timeScale += 0.1f;
+        }
+        if (Input.GetButtonDown ("SpeedDown")) {
+            Time.timeScale -= 0.1f;
+        }
+        Time.timeScale = Mathf.Clamp (Time.timeScale, 0.25f, 3);
     }
     
     public void OnPlay () {

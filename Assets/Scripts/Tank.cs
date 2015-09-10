@@ -29,13 +29,13 @@ public class Tank : MonoBehaviour {
     public float maxSpeed = 1;
     [Tooltip("Body turn rate (degrees per second)")]
     public float turnRate = 120;
-    [Tooltip("Tower turn rate (degrees per second)")]
-    public float towerTurnRate = 180;
+    [Tooltip("Turret turn rate (degrees per second)")]
+    public float turretTurnRate = 180;
 
     [HideInInspector]
     public new Transform transform;
     [HideInInspector]
-    public Transform tower;
+    public Transform turret;
     [HideInInspector]
     public float attackCooldownRemains = 0f;
 
@@ -47,7 +47,7 @@ public class Tank : MonoBehaviour {
         transform = GetComponent<Transform> ();
         rigidbody = GetComponent<Rigidbody2D> ();
         renderer = GetComponent<Renderer> ();
-        tower = transform.Find ("Tower");
+        turret = transform.Find ("Turret");
         allTanks.Add (this);
     }
 
@@ -80,7 +80,7 @@ public class Tank : MonoBehaviour {
             angle = -angle;
         }
         Quaternion targetRotation = Quaternion.AngleAxis (angle, Vector3.forward);
-        tower.rotation = Quaternion.RotateTowards (tower.rotation, targetRotation, towerTurnRate * Time.deltaTime);
+        turret.rotation = Quaternion.RotateTowards (turret.rotation, targetRotation, turretTurnRate * Time.deltaTime);
     }
 
     public void RotateTowards (Vector3 position) {
@@ -110,8 +110,8 @@ public class Tank : MonoBehaviour {
         }
         attackCooldownRemains = attackCooldown;
 
-        Vector3 endPoint = tower.position + tower.up * fovDistance;
-        RaycastHit2D hit = Physics2D.Linecast (tower.position, endPoint);
+        Vector3 endPoint = turret.position + turret.up * fovDistance;
+        RaycastHit2D hit = Physics2D.Linecast (turret.position, endPoint);
 
         bool laserVisible = renderer.isVisible;
 
@@ -162,12 +162,12 @@ public class Tank : MonoBehaviour {
     }
 
     void OnDrawGizmosSelected () {
-        if (!tower) {
+        if (!turret) {
             return;
         }
 
-        Gizmos.DrawLine (tower.position, tower.position + tower.up * fovDistance);
-        Gizmos.DrawLine (tower.position, tower.position + Quaternion.Euler (0, 0, fovAngle / 2) * tower.up * fovDistance);
-        Gizmos.DrawLine (tower.position, tower.position + Quaternion.Euler (0, 0, -fovAngle / 2) * tower.up * fovDistance);
+        Gizmos.DrawLine (turret.position, turret.position + turret.up * fovDistance);
+        Gizmos.DrawLine (turret.position, turret.position + Quaternion.Euler (0, 0, fovAngle / 2) * turret.up * fovDistance);
+        Gizmos.DrawLine (turret.position, turret.position + Quaternion.Euler (0, 0, -fovAngle / 2) * turret.up * fovDistance);
     }
 }

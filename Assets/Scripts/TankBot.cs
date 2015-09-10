@@ -7,7 +7,7 @@ public class TankBot : MonoBehaviour {
     static Collider2D[] closeColliders = new Collider2D[50];
     Tank tank;
     Tank target;
-    Vector3 targetLocation;
+    Vector3 destination;
     bool moving = false;
 
     void Awake () {
@@ -16,14 +16,14 @@ public class TankBot : MonoBehaviour {
 
     void Start () {
         StartCoroutine (SeekTarget ());
-        StartCoroutine (SelectTargetLocation ());
+        StartCoroutine (UpdateDestination ());
     }
 
     void Update () {
         if (target) {
             tank.RotateTowards (target.transform.position);
             tank.LookAt (target.transform.position);
-            if (Vector3.Angle (tank.tower.up, target.transform.position - tank.transform.position) < 1) {
+            if (Vector3.Angle (tank.turret.up, target.transform.position - tank.transform.position) < 1) {
                 tank.Fire ();
             }
 
@@ -37,24 +37,27 @@ public class TankBot : MonoBehaviour {
             }
         } else {
             if (moving) {
-                tank.RotateTowards (targetLocation);
-                tank.LookAt (targetLocation);
+                tank.RotateTowards (destination);
+                tank.LookAt (destination);
                 tank.Move (0.7f);
             }
         }
     }
 
-    IEnumerator SelectTargetLocation () {
-        targetLocation = new Vector3 (tank.transform.position.x, 0);
+    IEnumerator UpdateDestination () {
+        //move to frontier
+        destination = new Vector3 (tank.transform.position.x, 0);
 
         while (tank) {
             yield return new WaitForSeconds (Random.Range (1.0f, 2.0f));
 
-            if ((targetLocation - tank.transform.position).magnitude > tank.fovDistance / 2) {
+            if ((destination - tank.transform.position).magnitude > tank.fovDistance / 2) {
                 moving = true;
             } else {
                 moving = false;
-                targetLocation = Random.insideUnitCircle * tank.fovDistance * 4;
+
+                //patrol world center
+                destination = Random.insideUnitCircle * tank.fovDistance * 4;
             }
         }
     }
@@ -64,7 +67,7 @@ public class TankBot : MonoBehaviour {
             yield return new WaitForSeconds (Random.Range (0.15f, 0.3f));
 
             bool currentTargetVisible = false;
-            int count = Physics2D.OverlapCircleNonAlloc (transform.position, tank.fovDistance, closeColliders, visibleLayers);
+            int count = Physics2D.OverlapCircleNonAlloc (tank.transform.position, tank.fovDistance, closeColliders, visibleLayers);
             for (int i = 0; i < count; ++i) {
                 Collider2D collider = closeColliders [i];
                 Tank otherTank = collider.GetComponent<Tank> ();
@@ -77,7 +80,7 @@ public class TankBot : MonoBehaviour {
                 }
 
                 //check angular visibility
-                float angleToTarget = Vector3.Angle (tank.tower.up, otherTank.transform.position - tank.transform.position);
+                float angleToTarget = Vector3.Angle (tank.turret.up, otherTank.transform.position - tank.transform.position);
                 if (Mathf.Abs (angleToTarget) > tank.fovAngle / 2) {
                     continue;
                 }

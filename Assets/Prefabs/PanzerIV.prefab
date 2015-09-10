@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 401700}
   - 212: {fileID: 21278040}
   m_Layer: 0
-  m_Name: TankShadow
+  m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,7 +45,7 @@ GameObject:
   - 4: {fileID: 455544}
   - 212: {fileID: 21224460}
   m_Layer: 0
-  m_Name: Tower
+  m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,9 +144,9 @@ MonoBehaviour:
   fovAngle: 180
   maxSpeed: 3
   turnRate: 150
-  towerTurnRate: 150
+  turretTurnRate: 180
   transform: {fileID: 0}
-  tower: {fileID: 0}
+  turret: {fileID: 0}
   attackCooldownRemains: 0
 --- !u!212 &21224460
 SpriteRenderer:
