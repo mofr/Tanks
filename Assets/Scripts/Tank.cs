@@ -74,6 +74,7 @@ public class Tank : MonoBehaviour {
 
     public void LookAt (Vector3 position) {
         Vector3 direction = position - transform.position;
+        direction.z = 0;
         float angle = Vector3.Angle (Vector3.up, direction);
         if (Vector3.Cross (Vector3.up, direction).z < 0) {
             angle = -angle;
@@ -84,6 +85,7 @@ public class Tank : MonoBehaviour {
 
     public void RotateTowards (Vector3 position) {
         Vector3 direction = position - transform.position;
+        direction.z = 0;
         float angle = Vector3.Angle (Vector3.up, direction);
         if (Vector3.Cross (Vector3.up, direction).z < 0) {
             angle = -angle;

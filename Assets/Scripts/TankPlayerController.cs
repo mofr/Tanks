@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerInput : MonoBehaviour {
+public class TankPlayerController : MonoBehaviour {
 
     Tank tank;
 
@@ -10,9 +10,8 @@ public class PlayerInput : MonoBehaviour {
     }
 
     void Update () {
-        Vector3 pos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-        pos.z = 0;
-        tank.LookAt (pos);
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+        tank.LookAt (mousePos);
 
         tank.Move (Input.GetAxisRaw ("Vertical"));
         tank.Rotate (-Input.GetAxisRaw ("Horizontal"));

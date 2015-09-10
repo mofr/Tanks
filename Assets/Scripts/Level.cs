@@ -72,7 +72,7 @@ public class Level : MonoBehaviour {
 
     void GeneratePlayerTank () {
         Tank playerTank = Instantiate (tankPrefab1, new Vector3 (0, 0), Quaternion.identity) as Tank;
-        playerTank.gameObject.AddComponent<PlayerInput> ();
+        playerTank.gameObject.AddComponent<TankPlayerController> ();
         playerTank.name = "Player Tank";
         playerTank.tag = "Player";
         playerTank.immortal = true;
