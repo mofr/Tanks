@@ -37,7 +37,7 @@ public class Tank : MonoBehaviour {
     public static event DeathAction OnDeath;
 
     new Renderer renderer;
-    new Rigidbody2D rigidbody;
+    Rigidbody2D rigidbody;
     GameObject ui;
 
     void Awake () {
