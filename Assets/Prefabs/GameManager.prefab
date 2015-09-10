@@ -379,7 +379,7 @@ GameObject:
   - 114: {fileID: 11480750}
   - 114: {fileID: 11405930}
   - 114: {fileID: 11449684}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -742,7 +742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cafc63b68052874e8e34e266f6c26c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: {fileID: 11410512}
+  mapImage: {fileID: 11410512}
   width: 128
   height: 128
   background: {r: 0, g: 0, b: 0, a: 0}
@@ -1288,6 +1288,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  minSize: 2.70000005
+  maxSize: 8
 --- !u!114 &11482882
 MonoBehaviour:
   m_ObjectHideFlags: 1

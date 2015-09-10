@@ -3,26 +3,26 @@ using System.Collections;
 
 public class PlayerInput : MonoBehaviour {
 
-	Tank tank;
+    Tank tank;
 
-	void Awake () {
-		tank = GetComponent<Tank>();
-	}
+    void Awake () {
+        tank = GetComponent<Tank> ();
+    }
 
-	void Update () {
-		Vector3 pos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-		pos.z = 0;
-		tank.LookAt (pos);
+    void Update () {
+        Vector3 pos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+        pos.z = 0;
+        tank.LookAt (pos);
 
-		tank.Move(Input.GetAxisRaw ("Vertical"));
-		tank.Rotate(Input.GetAxisRaw ("Horizontal"));
+        tank.Move (Input.GetAxisRaw ("Vertical"));
+        tank.Rotate (-Input.GetAxisRaw ("Horizontal"));
 
-		if (Input.GetButton ("Fire1")) {
-			tank.Fire();
-		}
+        if (Input.GetButton ("Fire1")) {
+            tank.Fire ();
+        }
 
-		if (Input.GetButtonDown ("Immortal")) {
-			tank.immortal = !tank.immortal;
-		}
-	}
+        if (Input.GetButtonDown ("Immortal")) {
+            tank.immortal = !tank.immortal;
+        }
+    }
 }
