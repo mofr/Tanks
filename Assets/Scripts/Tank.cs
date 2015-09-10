@@ -5,6 +5,10 @@ using System.Collections.Generic;
 
 public class Tank : MonoBehaviour {
 
+    public delegate void DeathAction (Tank tank);
+    public static event DeathAction OnDeath;
+    public static HashSet<Tank> allTanks = new HashSet<Tank> ();
+
     public int team = 0;
     public GameObject uiPrefab;
     public GameObject hitEffectPrefab;
@@ -23,8 +27,10 @@ public class Tank : MonoBehaviour {
     public float fovDistance = 5;
     public float fovAngle = 120;
     public float maxSpeed = 1;
-    public float turnRate = 120; // degrees per second
-    public float towerTurnRate = 180; // degrees per second
+    [Tooltip("Body turn rate (degrees per second)")]
+    public float turnRate = 120;
+    [Tooltip("Tower turn rate (degrees per second)")]
+    public float towerTurnRate = 180;
 
     [HideInInspector]
     public new Transform transform;
@@ -32,9 +38,6 @@ public class Tank : MonoBehaviour {
     public Transform tower;
     [HideInInspector]
     public float attackCooldownRemains = 0f;
-
-    public delegate void DeathAction (Tank tank);
-    public static event DeathAction OnDeath;
 
     new Renderer renderer;
     Rigidbody2D rigidbody;
@@ -45,6 +48,11 @@ public class Tank : MonoBehaviour {
         rigidbody = GetComponent<Rigidbody2D> ();
         renderer = GetComponent<Renderer> ();
         tower = transform.Find ("Tower");
+        allTanks.Add (this);
+    }
+
+    void OnDestroy () {
+        allTanks.Remove (this);
     }
 
     void Update () {

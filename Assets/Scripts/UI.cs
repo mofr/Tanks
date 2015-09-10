@@ -31,7 +31,11 @@ public class UI : MonoBehaviour {
         fpsText.text = ((int)fps).ToString () + " fps";
 
         if (Input.GetButtonDown ("Cancel")) {
-            Application.LoadLevel(Application.loadedLevel);
+            if (generatePanel.activeSelf) {
+                Application.Quit ();
+            } else {
+                Application.LoadLevel(Application.loadedLevel);
+            }
         }
     }
     

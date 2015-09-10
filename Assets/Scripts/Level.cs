@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Level : MonoBehaviour {
 
@@ -8,9 +9,7 @@ public class Level : MonoBehaviour {
     public Tank tankPrefab2;
     public Material terrainMaterial;
     public float pixelsPerUnit = 100;
-    [HideInInspector]
-    public float
-        worldSize;
+    public float worldSize;
 
     void Awake () {
         instance = this;

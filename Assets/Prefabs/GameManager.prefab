@@ -743,9 +743,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapImage: {fileID: 11410512}
-  width: 128
-  height: 128
-  background: {r: 0, g: 0, b: 0, a: 0}
+  width: 188
+  height: 188
+  backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+  cameraColor: {r: .5, g: .5, b: .5, a: 1}
 --- !u!114 &11428850
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1896,7 +1897,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 140, y: 140}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0, y: 0}
 --- !u!224 &22499514
 RectTransform:
