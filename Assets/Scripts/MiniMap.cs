@@ -9,7 +9,6 @@ public class MiniMap : MonoBehaviour {
     public int width = 128;
     public int height = 128;
     public Color backgroundColor = new Color (0, 0, 0, 0);
-    public Color cameraColor = new Color (0.5f, 0.5f, 0.5f, 0.5f);
 
     Texture2D texture;
     
@@ -27,8 +26,7 @@ public class MiniMap : MonoBehaviour {
         while (this) {
             texture.SetPixels (backgroundPixels);
 
-            Vector3 translation = new Vector3 (texture.width / 2, 
-                                               texture.height / 2);
+            Vector3 translation = new Vector3 (texture.width / 2, texture.height / 2);
             Vector3 scale = new Vector3 (texture.width / Level.instance.worldSize, 
                                          -texture.height / Level.instance.worldSize);
             Matrix4x4 trs = Matrix4x4.TRS (translation, Quaternion.identity, scale);

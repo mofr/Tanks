@@ -15,8 +15,7 @@ public class CameraController : MonoBehaviour {
 
     void LateUpdate () {
         float scroll = Input.GetAxis ("Mouse ScrollWheel");
-        camera.orthographicSize -= scroll;
-        camera.orthographicSize = Mathf.Clamp (camera.orthographicSize, minSize, maxSize);
+        camera.orthographicSize = Mathf.Clamp (camera.orthographicSize - scroll, minSize, maxSize);
 
         if (target) {
             transform.position = new Vector3 (target.position.x, target.position.y, transform.position.z);

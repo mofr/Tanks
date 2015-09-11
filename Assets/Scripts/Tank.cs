@@ -18,7 +18,6 @@ public class Tank : MonoBehaviour {
     [Header("Battle")]
     public float maxHealth = 100;
     public float health = 100;
-    public bool dead = false;
     public bool immortal = false;
     public float damage = 100;
     public float attackCooldown = 1;
@@ -152,11 +151,6 @@ public class Tank : MonoBehaviour {
             }
 
             OnDeath (this);
-
-            dead = true;
-            if (ui) {
-                Destroy (ui.gameObject);
-            }
             Destroy (gameObject);
         }
     }

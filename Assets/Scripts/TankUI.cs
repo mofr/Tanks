@@ -16,7 +16,6 @@ public class TankUI : MonoBehaviour {
 
     void LateUpdate () {
         transform.rotation = Quaternion.identity;
-        transform.position = tank.transform.position;
             
         //update bars
         healthBar.transform.localScale = new Vector3 (Mathf.Clamp01 (tank.health / tank.maxHealth), 1);
