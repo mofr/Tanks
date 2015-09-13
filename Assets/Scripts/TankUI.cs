@@ -19,6 +19,6 @@ public class TankUI : MonoBehaviour {
             
         //update bars
         healthBar.transform.localScale = new Vector3 (Mathf.Clamp01 (tank.health / tank.maxHealth), 1);
-        attackRecoveryBar.transform.localScale = new Vector3 (Mathf.Clamp01 (tank.attackCooldownRemains / tank.attackCooldown), 1);
+        attackRecoveryBar.transform.localScale = new Vector3 (Mathf.Clamp01 (1 - tank.attackCooldownRemains / tank.attackCooldown), 1);
     }
 }

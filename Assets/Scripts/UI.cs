@@ -26,7 +26,7 @@ public class UI : MonoBehaviour {
     }
 
     void Update () {
-        deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
+        deltaTime += (Time.deltaTime / Time.timeScale - deltaTime) * 0.1f;
         float fps = 1.0f / deltaTime;
         fpsText.text = ((int)fps).ToString () + " fps";
 

@@ -130,13 +130,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team: 0
-  uiPrefab: {fileID: 199504, guid: 96ef579e23b6ede44b38e6e4f9c0be80, type: 2}
+  uiPrefab: {fileID: 110048, guid: a303edd657ed470468a7998d76c511d1, type: 2}
   hitEffectPrefab: {fileID: 139578, guid: 6ce89c0c8b21377438f18f3faa73e978, type: 2}
   deathEffectPrefab: {fileID: 141802, guid: 35866a6bf33755e4d87d84271363aba5, type: 2}
   laserPrefab: {fileID: 12036560, guid: af93bb0a50667a44b9490ee5c749c1db, type: 2}
   maxHealth: 100
   health: 100
-  dead: 0
   immortal: 0
   damage: 30
   attackCooldown: .5
@@ -244,7 +243,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: uiPrefab
       value: 
-      objectReference: {fileID: 199504, guid: 96ef579e23b6ede44b38e6e4f9c0be80, type: 2}
+      objectReference: {fileID: 110048, guid: a303edd657ed470468a7998d76c511d1, type: 2}
     - target: {fileID: 0}
       propertyPath: maxSpeed
       value: 3
