@@ -4,7 +4,7 @@ using System.Collections;
 
 public class UI : MonoBehaviour {
 
-    public GameObject generatePanel;
+    public GameObject startupPanel;
     public InputField tankCountInput;
     public InputField worldSizeInput;
     public GameObject scorePanel;
@@ -31,7 +31,7 @@ public class UI : MonoBehaviour {
         fpsText.text = ((int)fps).ToString () + " fps";
 
         if (Input.GetButtonDown ("Cancel")) {
-            if (generatePanel.activeSelf) {
+            if (startupPanel.activeSelf) {
                 Application.Quit ();
             } else {
                 Application.LoadLevel(Application.loadedLevel);
@@ -60,7 +60,7 @@ public class UI : MonoBehaviour {
 
         Level.instance.Generate (tankCount, worldSize);
 
-        generatePanel.SetActive (false);
+        startupPanel.SetActive (false);
         scorePanel.SetActive (true);
         mapPanel.SetActive (true);
 
