@@ -72,25 +72,21 @@ public class Tank : MonoBehaviour {
     }
 
     public void LookAt (Vector3 position) {
-        Vector3 direction = position - transform.position;
-        direction.z = 0;
-        float angle = Vector3.Angle (Vector3.up, direction);
-        if (Vector3.Cross (Vector3.up, direction).z < 0) {
-            angle = -angle;
-        }
-        Quaternion targetRotation = Quaternion.AngleAxis (angle, Vector3.forward);
-        turret.rotation = Quaternion.RotateTowards (turret.rotation, targetRotation, turretTurnRate * Time.deltaTime);
+		float turretTurnRateRadians = turretTurnRate * Mathf.Deg2Rad;
+		Vector3 direction = position - transform.position;
+		direction.z = 0;
+		direction = Vector3.RotateTowards (turret.up, direction, turretTurnRateRadians * Time.deltaTime, 0);
+		direction.z = 0;
+		turret.up = direction;
     }
 
     public void RotateTowards (Vector3 position) {
-        Vector3 direction = position - transform.position;
-        direction.z = 0;
-        float angle = Vector3.Angle (Vector3.up, direction);
-        if (Vector3.Cross (Vector3.up, direction).z < 0) {
-            angle = -angle;
-        }
-        Quaternion targetRotation = Quaternion.AngleAxis (angle, Vector3.forward);
-        transform.rotation = Quaternion.RotateTowards (transform.rotation, targetRotation, turnRate * Time.deltaTime);
+		float turnRateRadians = turnRate * Mathf.Deg2Rad;
+		Vector3 direction = position - transform.position;
+		direction.z = 0;
+		direction = Vector3.RotateTowards (transform.up, direction, turnRateRadians * Time.deltaTime, 0);
+		direction.z = 0;
+		transform.up = direction;
     }
 
     public void Rotate (float direction) {
